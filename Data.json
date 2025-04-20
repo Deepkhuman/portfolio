@@ -1,0 +1,64 @@
+{
+  "user": {
+    "name": "Devang Khuman",
+    "description": "I'm a passionate MERN Stack Developer who loves to build fast, responsive, and scalable web applications.",
+    "profile_picture_url": "src/assets/Ninja.png",
+    "resume_url": "src/assets/Resume.pdf"
+  },
+  "social_links": [
+    {
+      "platform": "GitHub",
+      "link": "https://github.com/deepkhuman"
+    },
+    {
+      "platform": "LinkedIn",
+      "link": "https://www.linkedin.com/in/devang-khuman-364a28269?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BmlqmfS1bR%2FyXyDl7P7CvXQ%3D%3D"
+    },
+    {
+      "platform": "Twitter",
+      "link": "https://twitter.com/GetMemes93957"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Project 1",
+      "description": "A cool project",
+      "url": "https://project1.com",
+      "technologies": ["React", "Node.js", "MongoDB"],
+      "image_url": "assets/project1.jpg"
+    },
+    {
+      "name": "Project 2",
+      "description": "Another cool project",
+      "url": "https://project2.com",
+      "technologies": ["React", "Express", "MySQL"],
+      "image_url": "assets/project2.jpg"
+    }
+  ],
+  "about": {
+    "title": "About Me",
+    "description": "I'm a passionate full-stack web developer proficient in the MERN stack. I love solving problems and building modern, scalable applications. I started my journey in tech by learning web development and eventually fell in love with the MERN stack for its flexibility and efficiency."
+  },
+  "technologies": [
+    {
+      "name": "React",
+      "icon": "FaReact",
+      "color": "text-blue-400"
+    },
+    {
+      "name": "Node.js",
+      "icon": "FaNodeJs",
+      "color": "text-green-400"
+    },
+    {
+      "name": "Database",
+      "icon": "FaDatabase",
+      "color": "text-yellow-400"
+    },
+    {
+      "name": "JavaScript",
+      "icon": "FaJsSquare",
+      "color": "text-yellow-500"
+    }
+  ]
+}
