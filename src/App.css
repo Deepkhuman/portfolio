@@ -1,165 +1,107 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
 @import "tailwindcss";
 
-/* App.css */
-
-.nav-menu {
-  font-family: 'Space Grotesk';
-  font-weight: 1200 !important;
+/* Cyber & Glassmorphism Utilities */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.nav-link {
-  color: white;
-  text-decoration: none;
-  transition: all 0.8s ease;
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-link:hover {
-  color: #ff1e56;
-  font-weight: 1200 !important;
+.glass-panel-hover:hover {
+  background: rgba(15, 23, 42, 0.85);
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.15);
 }
 
-.shining-text {
-  background: linear-gradient(90deg, #ffffff, #ff1e56, #ffffff);
-  background-size: 200%;
-  background-clip: text;
+/* Gradient Text Shimmer */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 40%, #38bdf8 100%);
   -webkit-background-clip: text;
-  color: transparent;
-  animation: shineText 3s linear infinite;
+  -webkit-text-fill-color: transparent;
 }
 
-@keyframes shineText {
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #e879f9 0%, #a855f7 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 3D Depth Card Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+
+/* Glowing Border Beam Animation */
+@keyframes borderBeam {
   0% {
-    background-position: -100% 0;
+    offset-distance: 0%;
   }
   100% {
-    background-position: 100% 0;
+    offset-distance: 100%;
   }
 }
 
-/* Add this in your App.css or a custom CSS file */
-
-/* HeroSection.css */
-@keyframes updown {
-  0% {
-    transform: translateY(-10px);
+/* Floating animation */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(-10px);
+    transform: translateY(-12px) rotate(1deg);
   }
 }
 
-.animate-updown {
-  animation: updown 2s infinite ease-in-out;
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
 }
 
-@keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
   }
-  
-  .animate-float {
-    animation: float 4s ease-in-out infinite;
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
   }
-  
-  .animate-float-delay-1 {
-    animation: float 4s ease-in-out infinite;
-    animation-delay: 1s;
-  }
-  
-  .animate-float-delay-2 {
-    animation: float 4s ease-in-out infinite;
-    animation-delay: 2s;
-  }
-  
-  .animate-float-delay-3 {
-    animation: float 4s ease-in-out infinite;
-    animation-delay: 3s;
-  }
-  
-  .animate-float-delay-4 {
-    animation: float 4s ease-in-out infinite;
-    animation-delay: 4s;
-  }
-  
-  @keyframes spin-slow {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  .animate-spin-slow {
-    animation: spin-slow 5s linear infinite; /* You can adjust the time for slower or faster spin */
-  }
-  
+}
 
-  @keyframes shine-icon {
-    0% {
-      text-shadow: 0 0 0px #fff;
-      filter: brightness(1);
-    }
-    50% {
-      text-shadow: 0 0 12px #ff0000, 0 0 24px #ff0000;
-      filter: brightness(1.4);
-    }
-    100% {
-      text-shadow: 0 0 0px #fff;
-      filter: brightness(1);
-    }
-  }
-  
-  .shine-hover {
-    display: inline-block;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .shine-hover:hover {
-    animation: shine-icon 1s ease-in-out;
-  }
-  
-  @keyframes fadeSlideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .animate-fade-slide-up {
-    animation: fadeSlideUp 1.5s ease-out forwards;
-  }
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
 
-  @keyframes silverShine {
-    0% {
-      background-position: -200% 0;
-    }
-    50% {
-      background-position: 200% 0;
-    }
-    100% {
-      background-position: -200% 0;
-    }
-  }
-  
-  .shine-font {
-    background: linear-gradient(90deg, #b1b1b1, #595454, #c0c0c0);
-    background-size: 200% 100%;
-    -webkit-background-clip: text; /* Clip the gradient to the text */
-    background-clip: text;
-    color: transparent; /* Make the text transparent so the gradient is visible */
-    animation: silverShine 8s linear infinite;
-  }
-  
+/* Subtle Cyber Grid Background */
+.cyber-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.radial-mask {
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}

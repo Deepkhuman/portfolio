@@ -1,154 +1,192 @@
-import React, { useState, useEffect, useRef } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import sumangal from "../../src/assets/sumangal.webp";
-import cryptoverse from "../../src/assets/cryptoverse.webp";
-import parkme from "../../src/assets/parkme.webp";
+import React, { useState } from 'react';
+import Tilt from 'react-parallax-tilt';
+import { FaExternalLinkAlt, FaGithub, FaRocket, FaCode } from 'react-icons/fa';
+import sumangal from '../assets/sumangal.webp';
+import cryptoverse from '../assets/cryptoverse.webp';
+import parkme from '../assets/parkme.webp';
 
 const Projects = () => {
-	const [currentIndex, setCurrentIndex] = useState(0);
-	const [inView, setInView] = useState(false); // Lazy loading state
-	const projectRefs = useRef([]);
+  const [filter, setFilter] = useState('All');
 
-	// Initialize AOS
-	useEffect(() => {
-		AOS.init({ duration: 800, once: true });
+  const projects = [
+    {
+      title: 'Sumangal Matrimony',
+      tagline: 'Dedicated Matchmaking & Matrimonial Platform',
+      description:
+        'A full-featured matrimonial platform built with modern UI/UX principles and robust backend logic. Features secure user registration, advanced search filtering, real-time profile management, and matchmaking criteria tailored for Indian families.',
+      category: 'Full-Stack',
+      tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
+      image: sumangal,
+      liveUrl: 'https://sumangalglobal.com/',
+      githubUrl: 'https://github.com/Deepkhuman',
+      featured: true,
+      badge: 'Production',
+    },
+    {
+      title: 'Crypto Verse',
+      tagline: 'Real-Time Cryptocurrency Analytics & Dashboard',
+      description:
+        'A comprehensive cryptocurrency tracker utilizing live API feeds. Provides real-time market statistics, price fluctuations, top coin analytics, interactive financial charts, and cryptocurrency global rankings.',
+      category: 'Frontend & API',
+      tags: ['React', 'RapidAPI', 'Tailwind CSS', 'Chart.js', 'Vite'],
+      image: cryptoverse,
+      liveUrl: '#',
+      githubUrl: 'https://github.com/Deepkhuman',
+      featured: false,
+      badge: 'Interactive',
+    },
+    {
+      title: 'Park.Me',
+      tagline: 'Smart Vehicle Parking & Slot Management System',
+      description:
+        'A full-cycle smart vehicle parking management system. Automates parking space allocation, vehicle check-in/check-out timestamps, real-time slot vacancy tracking, and role-based administrative dashboards.',
+      category: 'Full-Stack',
+      tags: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap', 'REST'],
+      image: parkme,
+      liveUrl: 'https://github.com/Deepkhuman/Park.me',
+      githubUrl: 'https://github.com/Deepkhuman/Park.me',
+      featured: false,
+      badge: 'System Architecture',
+    },
+  ];
 
-		// Set up lazy loading with IntersectionObserver
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setInView(true); // Once in view, load image
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
+  const categories = ['All', 'Full-Stack', 'Frontend & API'];
 
-		// Observe all project elements
-		projectRefs.current.forEach((ref) => observer.observe(ref));
+  const filteredProjects =
+    filter === 'All' ? projects : projects.filter((p) => p.category === filter);
 
-		return () => observer.disconnect(); // Cleanup observer
-	}, []);
+  return (
+    <section id="projects" className="relative py-24 px-6 max-w-6xl mx-auto">
+      {/* Background glow */}
+      <div className="absolute top-1/3 right-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-	const projects = [
-		{
-			title: "Sumangal Metrimony",
-			description:
-				"Sumangal Matrimony is a dedicated matchmaking platform built to simplify and personalize the partner search experience. Designed with modern UI/UX principles and robust backend logic, it offers secure registration, smart filtering, and user-centric profiles tailored to the cultural preferences of Indian families.",
-			link: "https://sumangalglobal.com/",
-			image: sumangal,
-		},
-		{
-			title: "Crypto Verse",
-			description:
-				"Crypto Verse is a real-time cryptocurrency dashboard that fetches live data using RapidAPI. It features dynamic price tracking, market stats, and visual insights for top coins, offering users a smooth and informative experience for crypto analysis.",
-			link: "#",
-			image: cryptoverse,
-		},
-		{
-			title: "Park.Me",
-			description:
-				"Park.me is a smart vehicle parking and management system developed using PHP and MySQL. It streamlines parking space allocation, vehicle entry/exit tracking, and slot availability in real-time. The system supports both admin and user roles for better control and visibility over vehicle movement and parking status.",
-			link: "https://github.com/Deepkhuman/Park.me",
-			image: parkme,
-		},
-	];
+      {/* Header */}
+      <div className="text-center mb-16 space-y-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border border-cyan-500/20 text-xs font-semibold text-cyan-400">
+          <FaRocket />
+          <span>Featured Engineering</span>
+        </div>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Selected <span className="text-gradient-cyan">Projects</span>
+        </h2>
+        <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base">
+          A showcase of real-world web applications built with scalability, user experience, and robust architecture.
+        </p>
 
-	const handlePrev = () => {
-		setCurrentIndex(
-			(prevIndex) => (prevIndex - 1 + projects.length) % projects.length
-		);
-	};
+        {/* Filter buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-2 pt-6">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                filter === cat
+                  ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25'
+                  : 'glass-panel text-slate-400 hover:text-white hover:border-white/20'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
 
-	const handleNext = () => {
-		setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
-	};
+      {/* Projects 3D Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {filteredProjects.map((project, idx) => (
+          <Tilt
+            key={project.title}
+            tiltMaxAngleX={10}
+            tiltMaxAngleY={10}
+            perspective={1000}
+            scale={1.02}
+            glareEnable={true}
+            glareMaxOpacity={0.15}
+            glareColor="#38bdf8"
+            glarePosition="all"
+            glareBorderRadius="24px"
+            className="rounded-3xl"
+          >
+            <div className="h-full glass-panel glass-panel-hover rounded-3xl border border-white/10 flex flex-col justify-between overflow-hidden group">
+              {/* Project Image Container */}
+              <div className="relative aspect-video w-full overflow-hidden bg-slate-900 border-b border-white/5">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
 
-	const getRelativeIndex = (index) => {
-		if (index === currentIndex) return 0;
-		if (index === (currentIndex + 1) % projects.length) return 1;
-		if (index === (currentIndex - 1 + projects.length) % projects.length)
-			return -1;
-		return null;
-	};
+                {/* Badge */}
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase font-bold tracking-wider bg-slate-950/80 backdrop-blur-md text-cyan-400 border border-cyan-500/30">
+                    {project.badge}
+                  </span>
+                </div>
+              </div>
 
-	return (
-		<section
-			className="bg-black text-white py-24 flex justify-center items-center flex-col"
-			data-aos="fade-up"
-			data-aos-delay="200"
-		>
-			{/* Projects Header */}
-			<div
-				className="text-center mb-12"
-				data-aos="fade-up"
-				data-aos-delay="100"
-			>
-				<h2 className="text-4xl font-bold text-white">My Projects</h2>
-				<p className="text-lg text-gray-400 mt-2">A glimpse of my work</p>
-			</div>
+              {/* Content */}
+              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs font-medium text-cyan-400">
+                    {project.tagline}
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed line-clamp-3">
+                    {project.description}
+                  </p>
+                </div>
 
-			<div className="relative w-[100%] max-w-4xl h-[400px]">
-				{/* Navigation Buttons */}
-				<button
-					onClick={handlePrev}
-					className="absolute left-0 top-1/2 -translate-y-1/2 z-20 !bg-gray-800 p-3 rounded-full text-white text-2xl hover:bg-gray-700"
-				>
-					‹
-				</button>
-				<button
-					onClick={handleNext}
-					className="absolute right-0 top-1/2 -translate-y-1/2 z-20 !bg-gray-800 p-3 rounded-full text-white text-2xl hover:bg-gray-700"
-				>
-					›
-				</button>
+                {/* Tech tags */}
+                <div className="pt-2 flex flex-wrap gap-1.5">
+                  {project.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-slate-900/90 text-slate-300 border border-white/5"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
 
-				{/* Cards Layered with Positioning */}
-				<div className="relative w-full h-full">
-					{projects.map((project, index) => {
-						const relativeIndex = getRelativeIndex(index);
-						if (relativeIndex === null) return null;
+                {/* Project Links */}
+                <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+                  {project.liveUrl && project.liveUrl !== '#' ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 shadow-md shadow-cyan-500/20 transition-all cursor-pointer"
+                    >
+                      <span>Live Demo</span>
+                      <FaExternalLinkAlt size={11} />
+                    </a>
+                  ) : (
+                    <span className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-medium text-slate-500 bg-white/5 cursor-not-allowed">
+                      <span>Internal Demo</span>
+                    </span>
+                  )}
 
-						let style = "";
-						if (relativeIndex === 0) {
-							style =
-								"z-30 scale-100 blur-0 opacity-100 left-1/2 -translate-x-1/2";
-						} else if (relativeIndex === 1) {
-							style =
-								"z-20 scale-90 blur-sm opacity-60 left-[75%] -translate-x-1/2";
-						} else if (relativeIndex === -1) {
-							style =
-								"z-10 scale-90 blur-sm opacity-60 left-[25%] -translate-x-1/2";
-						}
-
-						return (
-							<a
-								href={project.link}
-								key={index}
-								ref={(el) => (projectRefs.current[index] = el)}
-								className={`project-card absolute top-0 w-[300px] h-[350px] transition-all duration-500 ease-in-out transform ${style} bg-gray-900 rounded-xl shadow-xl p-6 flex flex-col justify-center items-center hover:scale-105 hover:shadow-2xl hover:border-1 hover:border-white cursor-pointer`}
-								style={{
-									backgroundImage: inView ? `url(${project.image})` : "none",
-									backgroundSize: "cover",
-									backgroundPosition: "center",
-								}}
-							>
-								<h3 className="text-xl font-bold hover:blur-2xl text-white text-center absolute bottom-4 left-1/2 transform -translate-x-1/2 group-hover:hidden">
-									<p className="flex w-70 justify-center">{project.title}</p>
-								</h3>
-
-								<p className="mt-2 text-white text-center opacity-0 hover:opacity-100 transition-opacity duration-300 absolute inset-0 flex justify-center items-center">
-									{project.description}
-								</p>
-							</a>
-						);
-					})}
-				</div>
-			</div>
-		</section>
-	);
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`GitHub for ${project.title}`}
+                    className="p-2.5 rounded-xl glass-panel text-slate-300 hover:text-white hover:border-cyan-500/40 hover:bg-slate-900 transition-all cursor-pointer"
+                  >
+                    <FaGithub size={16} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </Tilt>
+        ))}
+      </div>
+    </section>
+  );
 };
 
 export default Projects;
