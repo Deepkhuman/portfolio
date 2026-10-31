@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Typewriter from 'typewriter-effect';
+import Typewriter from './Typewriter';
 import { FaGithub, FaLinkedin, FaDownload, FaArrowRight, FaRocket } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import HeroScene3D from './HeroScene3D';
@@ -48,19 +48,15 @@ const HeroSection = ({ onScrollToProjects }) => {
           <div className="text-base sm:text-lg font-medium text-slate-300 min-h-[32px] sm:min-h-[36px] flex items-center justify-center lg:justify-start">
             <span className="text-cyan-400 mr-2 font-mono">&gt;</span>
             <Typewriter
-              options={{
-                strings: [
-                  "Building fast, responsive web systems 🔥",
-                  "Architecting scalable MERN backends ⚡",
-                  "Creating interactive, modern UI/UX 🚀",
-                  "Passionate about clean code 💻",
-                ],
-                autoStart: true,
-                loop: true,
-                delay: 40,
-                deleteSpeed: 20,
-                pauseFor: 2000,
-              }}
+              words={[
+                "Building fast, responsive web systems 🔥",
+                "Architecting scalable MERN backends ⚡",
+                "Creating interactive, modern UI/UX 🚀",
+                "Passionate about clean code 💻",
+              ]}
+              typingSpeed={40}
+              deletingSpeed={20}
+              pauseTime={2000}
             />
           </div>
 

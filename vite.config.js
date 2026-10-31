@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   base: "./",
   build: {
-    outDir: "publish",
+    outDir: "dist",
     emptyOutDir: true,
   },
   plugins: [react(), tailwindcss()],
